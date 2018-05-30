@@ -1,0 +1,29 @@
+{
+  "name": "d2l-replace-end-of-course-evaluation-links",
+  "version": "1.0.0",
+  "description": "This module is to find and replace all old End of Course Evaluation links in Canvas and Brightspace",
+  "main": "canvas-fix.js",
+  "dependencies": {
+    "canvas-api-wrapper": "^3.2.0",
+    "logger": "github:byuitechops/logger"
+  },
+  "devDependencies": {
+    "async": "^2.6.0",
+    "child-development-kit": "github:byuitechops/child-development-kit",
+    "tap": "^10.7.3"
+  },
+  "scripts": {
+    "start": "node canvas-fix.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/byuitechops/d2l-replace-end-of-course-evaluation-links.git"
+  },
+  "author": "Seth Childers",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/byuitechops/d2l-replace-end-of-course-evaluation-links/issues"
+  },
+  "homepage": "https://github.com/byuitechops/d2l-replace-end-of-course-evaluation-links#readme"
+}

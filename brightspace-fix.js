@@ -22,15 +22,17 @@
  * 
  * Returns the TOC object
  *********************************************/
-function getCourseTOC() {
-	var $ = window.top.jQuery;
-	var modules = [];
+function getCourseTOC(courseID) {
+	return new Promise((resolve, reject) => {
+		var $ = window.top.jQuery;
 
-	$.ajax({
-		dataType: "json",
-		url: '/d2l/api/le/1.24/65448/content/toc',
-		success: run,
-		method: 'GET',
+		$.ajax({
+			dataType: "json",
+			url: `/d2l/api/le/1.24/${courseID}/content/toc`,
+			success: resolve,
+			method: 'GET',
+			error: reject
+		});
 	});
 }
 
@@ -40,9 +42,8 @@ function getCourseTOC() {
  * 
  * Returns the flattened array of topic objects
  *********************************************/
-function getTopics(modules) {
+function getTopics(tableOfContents) {
 	var topics = [];
-	var recursiveCount = 0;
 
 	/********************************************************************************
 	 * A recursive function that will iterate through the TOC tree and push 
@@ -71,7 +72,7 @@ function getTopics(modules) {
 	}
 
 	/* Call the function once. If it has submodules, it will be called recursively */
-	recurseTOC(modules.Modules);
+	recurseTOC(tableOfContents.Modules);
 
 	/* Return a flattened array of topics */
 	return topics.reduce((acc, currArray) => acc.concat(currArray), []);
@@ -80,63 +81,139 @@ function getTopics(modules) {
 /*******************************************************************************
  * PUT the new topic to Brightspace with the correct URL and its old title
  *******************************************************************************/
-function putTopic(topic) {
-	console.log(topic)
-	var $ = window.top.jQuery;
+function putTopic(topic, courseID) {
+	return new Promise((resolve, reject) => {
+		console.log(`Topic before put: ${JSON.stringify(topic)}`);
+		var $ = window.top.jQuery;
 
-	$.ajax({
-		// dataType: "json",
-		processData: false,
-		contentType: "application/json; charset=UTF-8",
-		data: JSON.stringify({
-			"Title": topic.Title,
-			"ShortTitle": "short",
-			"Type": 1,
-			"TopicType": 3,
-			"Url": "https://web.byui.edu/endofcourseevaluation/",
-			"StartDate": null,
-			"EndDate": null,
-			"DueDate": null,
-			"IsHidden": false,
-			"IsLocked": false,
-			"OpenAsExternalResource": true,
-			"Description": null,
-			"MajorUpdate": null,
-			"MajorUpdateText": "update",
-			"ResetCompletionTracking": null,
-			"Duration": null
-		}),
-		url: `https://byui.brightspace.com/d2l/api/le/1.24/65448/content/topics/${topic.TopicId}`,
-		success: console.log,
-		method: 'PUT',
-		headers: {
-			'X-Csrf-Token': localStorage.getItem("XSRF.Token")
-		}
+		$.ajax({
+			// dataType: "json",
+			processData: false,
+			contentType: "application/json; charset=UTF-8",
+			data: JSON.stringify({
+				"Title": topic.Title,
+				"ShortTitle": "short",
+				"Type": 1,
+				"TopicType": 3,
+				"Url": "https://web.byui.edu/endofcourseevaluation/",
+				"StartDate": null,
+				"EndDate": null,
+				"DueDate": null,
+				"IsHidden": false,
+				"IsLocked": false,
+				"OpenAsExternalResource": true,
+				"Description": null,
+				"MajorUpdate": null,
+				"MajorUpdateText": "update",
+				"ResetCompletionTracking": null,
+				"Duration": null
+			}),
+			url: `https://byui.brightspace.com/d2l/api/le/1.24/${courseID}/content/topics/${topic.TopicId}`,
+			success: resolve,
+			method: 'PUT',
+			headers: {
+				'X-Csrf-Token': localStorage.getItem("XSRF.Token")
+			},
+			error: reject
+		});
+
 	});
-
 }
 
-/******************************************************************
- * After getting the Course's TOC in getCourseTOC(), the GET request
- * from in getCourseTOC() will call this function on success. This
- * function will act as main for this program 
- ******************************************************************/
-function run(modules) {
-	/* Get a flat array of the topics in the course from the table of contents */
-	var topics = getTopics(modules);
-	
-	/* Find the topic that has the old End of Course Evaluation link */
+/*******************************************************
+ * This function will loop through the array of courses
+ *******************************************************/
+async function runAllCourses() {
+	/* An array of all the courses' OUs */
+	var courses = [
+		65448,
+		65437,
+	];
+
+	/* A log of all the course IDs, their old urls, and their new urls to be put into the CSV */
+	var data = [];
+
+	/* Loop through and do the following for each course */
+	for (var i = 0; i < courses.length; i++) {
+		var logInfo = await run(courses[i]);
+		data.push(logInfo);
+	}
+
+	/* Format and create the CSV file with the log data */
+	var csvData = d3.csvFormat(data, ["Course ID", "Old URL", "Verified New URL"]);
+
+	/* Log the csv, and download it */
+	console.log(JSON.stringify(csvData));
+	download(csvData, 'myCSV.csv');
+}
+
+/******************************************************************************************
+ * This function will act as main for this program, as follows: 
+ * 
+ * 		Get the table of contents/ all the modules
+ * 		Get a flat array of the topics in the course from the table of contents
+ * 		Find the topic that has the old End of Course Evaluation link
+ * 		If the old End of Course Evaluation link exists in the course, then PUT the topic
+ ******************************************************************************************/
+async function run(courseID) {
+	var tableOfContents = await getCourseTOC(courseID);
+	var topics = getTopics(tableOfContents);
 	var endOfCourseEval = topics.find(topic => topic.Url === 'http://abish.byui.edu/berg/evaluation/select.cfm');
 
-	/* If the old End of Course Evaluation link exists in the course, call putTopic() */
+
+	/* If discoverOnly is true, then the old link will logged but not changed */
 	if (endOfCourseEval !== undefined) {
-		putTopic(endOfCourseEval);
+		console.log(`Topic with wrong url: ${JSON.stringify(endOfCourseEval)}`);
+		if (discoverOnly === false) {
+			await putTopic(endOfCourseEval, courseID);
+			var newLink = await verify(endOfCourseEval, courseID);
+
+			/* Return the log info */
+			return {
+				'Course ID': courseID,
+				'Old URL': endOfCourseEval.Url,
+				'Verified New URL': newLink
+			};
+		}
 	} else {
-		console.log(`Did not find old link to End of Course Evaluation`);
+		console.log(`Course: - Did not find old link to End of Course Evaluation`);
+
+		/* Return the log info */
+		return {
+			'Course ID': courseID,
+			'Old URL': 'Old link not found',
+			'Verified New URL': 'No new link added'
+		};
 	}
+}
+
+/**************************************************************
+ * After the PUT request, this function is called to check
+ * the changed topic's Url to verify that it has been changed
+ **************************************************************/
+function verify(topic, courseID) {
+	return new Promise((resolve, reject) => {
+		var $ = window.top.jQuery;
+
+		var myString = 'hello world';
+
+		$.ajax({
+			dataType: "json",
+			url: `/d2l/api/le/1.24/${courseID}/content/topics/${topic.TopicId}`,
+			success: (returnedTopic) => {
+				console.log(`Replaced Link - : ${JSON.stringify(returnedTopic.Url)}`);
+				resolve(returnedTopic.Url);
+			},
+			method: 'GET',
+			error: reject
+		});
+	});
 }
 
 /*********************************
  * Start Here
  *********************************/
-window.top.addEventListener('load', getCourseTOC);
+// if you only want to look at whether or not the course has the old link, set discoverOnly to true
+// if you want to replace the link as well, set discoverOnly to false
+const discoverOnly = false;
+window.top.addEventListener('load', runAllCourses);

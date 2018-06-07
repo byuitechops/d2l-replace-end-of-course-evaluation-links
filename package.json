@@ -7,7 +7,8 @@
     "canvas-api-wrapper": "^3.2.0",
     "d3-dsv": "^1.0.8",
     "fs": "0.0.1-security",
-    "logger": "github:byuitechops/logger"
+    "logger": "github:byuitechops/logger",
+    "prompt": "^1.0.0"
   },
   "devDependencies": {
     "async": "^2.6.0",
@@ -15,7 +16,7 @@
     "tap": "^10.7.3"
   },
   "scripts": {
-    "start": "node canvas-fix.js",
+    "start": "node cli.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

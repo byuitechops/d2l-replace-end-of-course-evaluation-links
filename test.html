@@ -1,8 +1,24 @@
 <html>
-    <head>
-        <script src="./end-of-course-evals.js"></script>
-    </head>
-    <body>
-        <p>Hello World!</p>
+
+<head>
+    <script src="./end-of-course-evals.js"></script>
+    <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
+    <script src="./download.js"></script>
+</head>
+
+<body>
+    <h1>CSV Link Replacer</h1>
+    <div>
+        <p>Would you like to ONLY check for the provided link in these courses?</p>
+        <select id="discoverOnly">
+            <option value="true" selected>Only Search the Course</option>
+            <option value="false">Replace the Links</option>
+        </select>
+        <p>Make sure your CSV file has a 'name' column and an 'id' column.</p>
+        <div>Choose a CSV file to upload.
+            <input type="file" class="csvInput"/>
+        </div>
+    </div>
+    <pre class="csvDisplay"><pre>
     </body>
 </html>

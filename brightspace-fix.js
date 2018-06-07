@@ -16,6 +16,78 @@
  * to avoid having to re-upload the file to Brightspace every time I modified the code.
  ********************************************************************************************/
 
+/********************************************************************
+ * Get the contents of the inputed file
+ ********************************************************************/
+function getCourses() {
+	return new Promise((resolve, reject) => {
+
+		var csvInput = document.getElementsByClassName('csvInput')[0];
+		var csvDisplay = document.getElementsByClassName('csvDisplay')[0];
+
+		csvInput.addEventListener('change', () => {
+			var file = csvInput.files[0];
+			var textType = /application\/vnd.ms-excel|text.*/;
+			if (file.type.match(textType)) {
+				var reader = new FileReader();
+				var fileContents = '';
+				var courses = [];
+				var csvArray = [];
+
+				reader.onload = () => {
+					fileContents = reader.result;
+					csvDisplay.innerText = fileContents;
+
+					/* Use d3.dsv to turn the CSV file into an array of objects */
+					csvArray = d3.csvParse(fileContents);
+	
+					/* Retrieve the courses' ids and names from the CSV */
+					courses = csvArray.map(csv => {
+						return {
+							id: csv.id, // expecting an id column in the CSV
+							name: csv.name // expecting a name column in the CSV
+						}
+					});
+					resolve(courses);
+				}
+				reader.readAsText(file);
+			} else {
+				csvDisplay.innerText = "File not supported!"
+				reject();
+			}
+		});
+	})
+}
+
+/******************************************************************************************
+ * This function will act as main for this program, as follows: 
+ * 
+ * 		Get the table of contents/ all the modules
+ * 		Get a flat array of the topics in the course from the table of contents
+ * 		Find the topic that has the old End of Course Evaluation link
+ * 		If the old End of Course Evaluation link exists in the course, then PUT the topic
+ * 		Log the results
+ ******************************************************************************************/
+async function run(course) {
+	var tableOfContents = await getCourseTOC(course.id);
+	var topics = getTopics(tableOfContents);
+	var endOfCourseEval = topics.find(topic => topic.Url === 'http://abish.byui.edu/berg/evaluation/select.cfm');
+
+	/* If discoverOnly is true, then the old link will still be logged but not changed */
+	if (endOfCourseEval !== undefined && discoverOnly !== true) {
+		console.log(`Topic with wrong url: ${JSON.stringify(endOfCourseEval)}`);
+		await putTopic(endOfCourseEval, course.id);
+		var newLink = await verify(endOfCourseEval, course.id);
+	}
+	/* Return the log info */
+	return {
+		'Course Name': course.name,
+		'Course ID': course.id,
+		'URL Before Change': endOfCourseEval ? endOfCourseEval.Url : 'Old link not found',
+		'Verified New URL': newLink ? newLink : 'No new link added'
+	};
+}
+
 /*********************************************
  * Get the modules and topics in the course
  * from the course's Table of Contents (TOC)
@@ -83,7 +155,6 @@ function getTopics(tableOfContents) {
  *******************************************************************************/
 function putTopic(topic, courseID) {
 	return new Promise((resolve, reject) => {
-		console.log(`Topic before put: ${JSON.stringify(topic)}`);
 		var $ = window.top.jQuery;
 
 		$.ajax({
@@ -116,75 +187,7 @@ function putTopic(topic, courseID) {
 			},
 			error: reject
 		});
-
 	});
-}
-
-/*******************************************************
- * This function will loop through the array of courses
- *******************************************************/
-async function runAllCourses() {
-	/* An array of all the courses' OUs */
-	var courses = [
-		65448,
-		65437,
-	];
-
-	/* A log of all the course IDs, their old urls, and their new urls to be put into the CSV */
-	var data = [];
-
-	/* Loop through and do the following for each course */
-	for (var i = 0; i < courses.length; i++) {
-		var logInfo = await run(courses[i]);
-		data.push(logInfo);
-	}
-
-	/* Format and create the CSV file with the log data */
-	var csvData = d3.csvFormat(data, ["Course ID", "Old URL", "Verified New URL"]);
-
-	/* Log the csv, and download it */
-	console.log(JSON.stringify(csvData));
-	download(csvData, 'myCSV.csv');
-}
-
-/******************************************************************************************
- * This function will act as main for this program, as follows: 
- * 
- * 		Get the table of contents/ all the modules
- * 		Get a flat array of the topics in the course from the table of contents
- * 		Find the topic that has the old End of Course Evaluation link
- * 		If the old End of Course Evaluation link exists in the course, then PUT the topic
- ******************************************************************************************/
-async function run(courseID) {
-	var tableOfContents = await getCourseTOC(courseID);
-	var topics = getTopics(tableOfContents);
-	var endOfCourseEval = topics.find(topic => topic.Url === 'http://abish.byui.edu/berg/evaluation/select.cfm');
-
-
-	/* If discoverOnly is true, then the old link will logged but not changed */
-	if (endOfCourseEval !== undefined) {
-		console.log(`Topic with wrong url: ${JSON.stringify(endOfCourseEval)}`);
-		if (discoverOnly === false) {
-			await putTopic(endOfCourseEval, courseID);
-			var newLink = await verify(endOfCourseEval, courseID);
-
-			/* Return the log info */
-			return {
-				'Course ID': courseID,
-				'Old URL': endOfCourseEval.Url,
-				'Verified New URL': newLink
-			};
-		}
-	} else {
-		console.log(`Course: - Did not find old link to End of Course Evaluation`);
-
-		/* Return the log info */
-		return {
-			'Course ID': courseID,
-			'Old URL': 'Old link not found',
-			'Verified New URL': 'No new link added'
-		};
-	}
 }
 
 /**************************************************************
@@ -194,8 +197,6 @@ async function run(courseID) {
 function verify(topic, courseID) {
 	return new Promise((resolve, reject) => {
 		var $ = window.top.jQuery;
-
-		var myString = 'hello world';
 
 		$.ajax({
 			dataType: "json",
@@ -210,10 +211,35 @@ function verify(topic, courseID) {
 	});
 }
 
+/*******************************************************
+ * This function will loop through the array of courses
+ *******************************************************/
+async function runAllCourses() {
+	/* Get an array of all the courses' OUs and their names */
+	const courses = await getCourses();
+
+	/* A log of all the course IDs, their old urls, and their new urls to be put into the CSV */
+	var data = [];
+
+	/* Loop through and do the following for each course */
+	for (var i = 0; i < courses.length; i++) {
+		var logInfo = await run(courses[i]);
+		data.push(logInfo);
+	}
+
+	/* Format and create the CSV file with the log data */
+	var csvData = d3.csvFormat(data, ["Course Name", "Course ID", "URL Before Change", "Verified New URL"]);
+
+	/* Log the csv, and download it */
+	download(csvData, 'brightspaceLinkReplacementReport.csv');
+}
+
+
 /*********************************
  * Start Here
  *********************************/
 // if you only want to look at whether or not the course has the old link, set discoverOnly to true
 // if you want to replace the link as well, set discoverOnly to false
-const discoverOnly = false;
+const discoverOnly = document.getElementById('discoverOnly').value;
+console.log(discoverOnly);
 window.top.addEventListener('load', runAllCourses);

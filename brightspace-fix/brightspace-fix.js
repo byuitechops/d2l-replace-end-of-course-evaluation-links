@@ -25,7 +25,7 @@ function getCourses() {
 		var csvInput = document.getElementsByClassName('csvInput')[0];
 		var csvDisplay = document.getElementsByClassName('csvDisplay')[0];
 
-		csvInput.addEventListener('change', () => {
+		// csvInput.addEventListener('change', () => {
 			var file = csvInput.files[0];
 			var textType = /application\/vnd.ms-excel|text.*/;
 			if (file.type.match(textType)) {
@@ -40,7 +40,7 @@ function getCourses() {
 
 					/* Use d3.dsv to turn the CSV file into an array of objects */
 					csvArray = d3.csvParse(fileContents);
-	
+
 					/* Retrieve the courses' ids and names from the CSV */
 					courses = csvArray.map(csv => {
 						return {
@@ -55,8 +55,8 @@ function getCourses() {
 				csvDisplay.innerText = "File not supported!"
 				reject();
 			}
-		});
-	})
+		// });
+	});
 }
 
 /******************************************************************************************
@@ -68,23 +68,27 @@ function getCourses() {
  * 		If the old End of Course Evaluation link exists in the course, then PUT the topic
  * 		Log the results
  ******************************************************************************************/
-async function run(course) {
+async function runCourse(course, discoverOnly) {
+	var oldLink = document.getElementsByClassName('oldLink')[0].value;
+	var newLink = document.getElementsByClassName('newLink')[0].value;
+
 	var tableOfContents = await getCourseTOC(course.id);
 	var topics = getTopics(tableOfContents);
-	var endOfCourseEval = topics.find(topic => topic.Url === 'http://abish.byui.edu/berg/evaluation/select.cfm');
+	var endOfCourseEval = topics.find(topic => topic.Url === oldLink);
+	// var endOfCourseEval = topics.find(topic => topic.Url === 'http://abish.byui.edu/berg/evaluation/select.cfm');
 
 	/* If discoverOnly is true, then the old link will still be logged but not changed */
-	if (endOfCourseEval !== undefined && discoverOnly !== true) {
+	if (endOfCourseEval !== undefined && discoverOnly === 'false') {
 		console.log(`Topic with wrong url: ${JSON.stringify(endOfCourseEval)}`);
-		await putTopic(endOfCourseEval, course.id);
-		var newLink = await verify(endOfCourseEval, course.id);
+		await putTopic(endOfCourseEval, course.id, newLink);
+		var verifiedLink = await verify(endOfCourseEval, course.id);
 	}
 	/* Return the log info */
 	return {
 		'Course Name': course.name,
 		'Course ID': course.id,
 		'URL Before Change': endOfCourseEval ? endOfCourseEval.Url : 'Old link not found',
-		'Verified New URL': newLink ? newLink : 'No new link added'
+		'Verified New URL': verifiedLink ? verifiedLink : 'No new link added'
 	};
 }
 
@@ -153,7 +157,7 @@ function getTopics(tableOfContents) {
 /*******************************************************************************
  * PUT the new topic to Brightspace with the correct URL and its old title
  *******************************************************************************/
-function putTopic(topic, courseID) {
+function putTopic(topic, courseID, newLink) {
 	return new Promise((resolve, reject) => {
 		var $ = window.top.jQuery;
 
@@ -166,7 +170,7 @@ function putTopic(topic, courseID) {
 				"ShortTitle": "short",
 				"Type": 1,
 				"TopicType": 3,
-				"Url": "https://web.byui.edu/endofcourseevaluation/",
+				"Url": newLink,
 				"StartDate": null,
 				"EndDate": null,
 				"DueDate": null,
@@ -214,7 +218,7 @@ function verify(topic, courseID) {
 /*******************************************************
  * This function will loop through the array of courses
  *******************************************************/
-async function runAllCourses() {
+async function runAllCourses(discoverOnly) {
 	/* Get an array of all the courses' OUs and their names */
 	const courses = await getCourses();
 
@@ -223,7 +227,7 @@ async function runAllCourses() {
 
 	/* Loop through and do the following for each course */
 	for (var i = 0; i < courses.length; i++) {
-		var logInfo = await run(courses[i]);
+		var logInfo = await runCourse(courses[i], discoverOnly);
 		data.push(logInfo);
 	}
 
@@ -240,6 +244,7 @@ async function runAllCourses() {
  *********************************/
 // if you only want to look at whether or not the course has the old link, set discoverOnly to true
 // if you want to replace the link as well, set discoverOnly to false
-const discoverOnly = document.getElementById('discoverOnly').value;
-console.log(discoverOnly);
-window.top.addEventListener('load', runAllCourses);
+function setupTool() {
+	const discoverOnly = document.getElementById('discoverOnly').value;
+	runAllCourses(discoverOnly);
+}

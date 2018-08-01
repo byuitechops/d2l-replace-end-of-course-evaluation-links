@@ -37,23 +37,21 @@
     <h1>CSV Link Replacer</h1>
     <p>Select Your Settings Here and Upload a CSV File with a List of Courses to Make the Changes to</p>
     <div>
-        <h3>Would you like to ONLY check for the provided link in these courses?</h3>
+        <h3>Would you like to find or replace the links in the course?</h3>
         <select id="discoverOnly">
-            <option value="true" selected>Only Search the Course</option>
-            <option value="false">Replace the Links</option>
+            <option value="true" selected>Find</option>
+            <option value="false">Replace</option>
         </select>
     </div>
     <div>
-        <h3>If only searching the courses, the link to search for goes here. If replacing links, the one to be replaced goes
-            here (i.e. the old link). </h3>
-        <label>Old link/ Link to search for
+        <h3>Link Searching For</h3>
+        <label>URL
             <input type="url" class="oldLink">
         </label>
     </div>
     <div>
-        <h3>Not inputting a value here when replacing the links will change out the old link with an empty link. The result in
-            the CSV will say "No new link added" when in fact the new link is " " (i.e. An empty string).</h3>
-        <label>New link
+        <h3>Link to Replace (will be ignored if only searching)</h3>
+        <label>URL
             <input type="url" class="newLink">
         </label>
     </div>

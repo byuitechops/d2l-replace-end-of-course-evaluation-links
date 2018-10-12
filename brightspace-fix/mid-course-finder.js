@@ -63,43 +63,35 @@ function getCourses() {
  * 		If the old link exists in the course, then PUT the topic
  * 		Log the results
  ******************************************************************************************/
-function runCourse(course, discoverOnly) {
+function runCourse(course) {
     return new Promise(async (resolve, reject) => {
-
-        var oldLink = document.getElementsByClassName('oldLink')[0].value;
-        var newLink = document.getElementsByClassName('newLink')[0].value;
-        var error = '';
-        var tableOfContents = await getCourseTOC(course.id);
-        // just so we can see it working in the console
-        console.log(course.id);
+        var error = {};
+        var tableOfContents = await getCourseTOC(course.id).catch(err => {
+            error.getCourseTOC = err;
+            console.error(err);
+        });
+        console.log(tableOfContents);
         var topics = getTopics(tableOfContents);
-        // check if there are more than one & check topic.type
-        var found = topics.filter(topic => topic.Url !== null && topic.Url.includes(oldLink));
-        
-        /* check if there were more than one topic found in the course that matched */
-        /* If discoverOnly is true, then the old link will still be logged but not changed */
-        if (found.length > 0 && discoverOnly === 'false') {
-            await putTopic(found[0], course.id, newLink);
-            var verifiedTopic = await verify(found[0], course.id, newLink).catch(err => {
-                console.error(err);
-                error = err;
-            });
-        } 
+
+        // check if there are more than one
+        var found = topics.filter(topic => {
+            // console.log(topic.TypeIdentifier, /mid-?\s?course\s*eval(uation)?/gi.test(topic.Title));
+            return topic.TypeIdentifier === 'Link' && /mid-?\s?course\s*eval(uation)?/gi.test(topic.Title);
+        });
+
+        // throw an error if there is more than one mid-course eval
         if (found.length > 1) {
-            error = `This course has ${found.length} matchs for the given link.`;
-            console.error(error);
+            error.numMatches = `This course has ${found.length} matchs for 'Mid-Course Evaluation'.`;
+            console.error(error.numMatches);
         }
-        
+
         /* Return the log info */
         resolve({
             'Course Name': course.name,
             'Course ID': course.id,
-            'URL Before Change': found.length > 0 ? found[0].Url : null,
-            'Verified New URL': verifiedTopic ? verifiedTopic.link : null,
-            'Verified Start Date': verifiedTopic ? verifiedTopic.startDate : null,
-            'Verified Due Date': verifiedTopic ? verifiedTopic.dueDate : null,
-            'Verified Title': verifiedTopic ? verifiedTopic.title : null,
-            'Errors': error ? error : null
+            'Link to Evaluation': found.length > 0 ? `https://byui.brightspace.com${found[0].Url}` : '',
+            'Evaluation Found': found.length > 0 ? 'Found' : 'Not Found',
+            'Errors': Object.keys(error).length > 0 ? JSON.stringify(error) : ''
         });
     });
 }
@@ -166,73 +158,10 @@ function getTopics(tableOfContents) {
     return topics.reduce((acc, currArray) => acc.concat(currArray), []);
 }
 
-/*******************************************************************************
- * PUT the new topic to Brightspace with the correct URL and its old title
- *******************************************************************************/
-function putTopic(topic, courseID, newLink) {
-    return new Promise((resolve, reject) => {
-        var $ = window.top.jQuery;
-        // Talk to customer about needed attributes here
-        $.ajax({
-            processData: false,
-            contentType: "application/json; charset=UTF-8",
-            data: JSON.stringify({
-				"TopicType": 3,
-				"Url": newLink,
-				"StartDate": null,
-				"EndDate": null,
-				"DueDate": null,
-				"IsHidden": false,
-				"IsLocked": false,
-                "OpenAsExternalResource": true,
-                "Title": "Online Instructor Community",
-				"ShortTitle": topic.ShortTitle ? topic.ShortTitle : "",
-				"Type": 1,
-            }),
-            url: `https://pathway.brightspace.com/d2l/api/le/1.24/${courseID}/content/topics/${topic.TopicId}`,
-            success: resolve,
-            method: 'PUT',
-            headers: {
-                'X-Csrf-Token': localStorage.getItem("XSRF.Token")
-            },
-            error: reject
-        });
-    });
-}
-
-/**************************************************************
- * After the PUT request, this function is called to check
- * the changed topic's Url to verify that it has been changed
- **************************************************************/
-function verify(topic, courseID, desiredUrl) {
-    return new Promise((resolve, reject) => {
-        var $ = window.top.jQuery;
-
-        $.ajax({
-            dataType: "json",
-            url: `/d2l/api/le/1.24/${courseID}/content/topics/${topic.TopicId}`,
-            success: (returnedTopic) => {
-                if (returnedTopic.Url === desiredUrl) {
-                    console.log('verified', returnedTopic)
-                    resolve({
-                        link: returnedTopic.Url,
-                        title: returnedTopic.Title
-                    });
-                } else {
-                    console.log('rejected', returnedTopic)
-                    reject('Verification failed');
-                }
-            },
-            method: 'GET',
-            error: reject
-        });
-    });
-}
-
 /*******************************************************
  * This function will loop through the array of courses
  *******************************************************/
-async function runAllCourses(discoverOnly) {
+async function runAllCourses() {
     try {
         /* Get an object array of all the courses' OUs and their names */
         const courses = await getCourses().catch(err => console.error(err));
@@ -242,15 +171,15 @@ async function runAllCourses(discoverOnly) {
 
         /* Loop through and do the following for each course */
         for (var i = 0; i < courses.length; i++) {
-            var logInfo = await runCourse(courses[i], discoverOnly);
+            var logInfo = await runCourse(courses[i]);
             data.push(logInfo);
         }
 
         /* Format and create the CSV file with the log data */
-        var csvData = d3.csvFormat(data, ["Course Name", "Course ID", "URL Before Change", "Verified New URL", "Verified Start Date", "Verified Due Date", "Verified Title", "Errors"]);
+        var csvData = d3.csvFormat(data, ["Course Name", "Course ID", "Link to Evaluation", "Evaluation Found", "Errors"]);
 
         /* Log the csv, and download it */
-        download(csvData, 'brightspaceLinkReplacementReport.csv');
+        download(csvData, 'brightspaceReport.csv');
     } catch (e) {
         console.error(e.stack);
     }
@@ -258,11 +187,8 @@ async function runAllCourses(discoverOnly) {
 
 
 /*********************************
- * Start Here
+ * Start Here ^
  *********************************/
-// if  discoverOnly === true, the tool will look at whether or not the course has the old link
-// if discoverOnly === false, the tool will replace the link as well
 function setupTool() {
-    const discoverOnly = document.getElementById('discoverOnly').value;
-    runAllCourses(discoverOnly);
+    runAllCourses();
 }

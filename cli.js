@@ -11,13 +11,15 @@ function getPath() {
                     type: 'string',
                     pattern: /.csv$/,
                     message: `(i.e. '../myExample.csv')`,
-                    required: true
+                    required: true,
+                    default: 'canvasCourses.csv'
                 },
                 discoverOnly: {
                     type: 'string',
                     pattern: /true|false/i,
                     message: `(i.e. true/false)`,
-                    required: true
+                    required: true,
+                    default: true
                 }
             }
         };
@@ -25,8 +27,7 @@ function getPath() {
         prompt.get(schema, (err, userInput) => {
             if (err) {
                 console.error(err);
-                reject(err);
-                return;
+                return reject(err);
             }
             resolve(userInput);
         });
@@ -39,10 +40,3 @@ async function run() {
 }
 
 run();
-// .catch((err)=> {
-//     console.log(`Workingggg`);
-//     if (err) {
-//         console.error(err);
-//     }
-//     console.log(`Good job`);
-// });

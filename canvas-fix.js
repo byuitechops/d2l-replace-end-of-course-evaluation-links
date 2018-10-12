@@ -1,5 +1,4 @@
 const canvas = require('canvas-api-wrapper');
-const asyncLib = require('async');
 const Logger = require('logger');
 const logger = new Logger('End of Course Evaluation Links Replaced');
 const d3 = require('d3-dsv');
@@ -13,7 +12,7 @@ const fs = require('fs');
  *     - Verify it has been fixed 
  *  - Log the results
  ***********************************************************/
-function runTest(courseInfo, discoverOnly) {
+function courseLogic(courseInfo, discoverOnly) {
     return new Promise(async (resolve, reject) => {
 
         var course = await canvas.getCourse(courseInfo.id);
@@ -22,19 +21,22 @@ function runTest(courseInfo, discoverOnly) {
         var moduleItem = getLink(course);
         var modifiedModItem = '';
 
-        if (moduleItem !== null && discoverOnly !== true) {
+        /* If there is a module item with the old link, and the link 
+        should be replaced, then fix it and verify that it has been fixed */
+        if (moduleItem !== null && discoverOnly === false) {
             var courseData = await fixLink(moduleItem, courseInfo.id);
             modifiedModItem = await verifyLink(courseData);
         }
 
+        /* Set up the log for the course */
         var logItems = {
             'Course Name': courseInfo.name,
             'Course ID': courseInfo.id,
-            'Module ID': moduleItem ? moduleItem.module_id : '',
-            'Module Item ID': moduleItem ? moduleItem.id : '',
-            'URL Before Change': moduleItem ? moduleItem.external_url : '',
-            'Verified New URL': modifiedModItem ? modifiedModItem.external_url : '',
-            'Link to Module Item': moduleItem ? `https://byui.instructure.com/courses/${courseInfo.id}/modules#module_${moduleItem.module_id}` : ''
+            'Module ID': moduleItem ? moduleItem.module_id : 'n/a',
+            'Module Item ID': moduleItem ? moduleItem.id : 'n/a',
+            'URL Before Change': moduleItem ? moduleItem.external_url : 'n/a',
+            'Verified New URL': modifiedModItem ? modifiedModItem.external_url : 'n/a',
+            'Link to Module Item': moduleItem ? `https://byui.instructure.com/courses/${courseInfo.id}/modules#module_${moduleItem.module_id}` : 'n/a'
         };
 
         logger.log(`End of Course Evaluation Link Replacement`, logItems);
@@ -48,8 +50,7 @@ function getCourses(filePath) {
         fs.readFile(filePath, 'utf8', (err, fileContents) => {
             if (err) {
                 console.error(err);
-                reject(err);
-                return;
+                return reject(err);
             }
             /* Use d3.dsv to turn the CSV file into an array of objects */
             var csvArray = d3.csvParse(fileContents);
@@ -61,6 +62,7 @@ function getCourses(filePath) {
                     name: csv.name // expecting a name column in the CSV
                 }
             });
+            /* Return the courses from the csv */
             resolve(courses);
         });
     });
@@ -68,12 +70,13 @@ function getCourses(filePath) {
 
 /* Get the module item that needs to be fixed */
 function getLink(course) {
-    /* Loop through each module item and check if it has the old End of Course Evaluation link  */
+    /* Loop through each module item and check if it has the old link  */
     for (var i = 0; i < course.modules.length; i++) {
         for (var j = 0; j < course.modules[i].moduleItems.length; j++) {
             /* If it is an external url module item and it has the old url, then replace it with the new link and update the course */
             if (course.modules[i].moduleItems[j].type === 'ExternalUrl' && course.modules[i].moduleItems[j].external_url === 'http://abish.byui.edu/berg/evaluation/select.cfm') {
                 /* Return the module item that has the old url */
+                console.log('oldUrl found', course.modules[i].moduleItems[j]);
                 return course.modules[i].moduleItems[j];
             }
         }
@@ -96,15 +99,14 @@ async function fixLink(moduleItem, courseID) {
         }, (err) => {
             if (err) {
                 console.error(err);
-                reject(err);
-                return;
+                return reject(err);
             }
+            console.log('after put', courseID, oldUrl, newUrl, moduleItem);
             resolve({
                 courseID,
                 oldUrl,
                 newUrl,
                 moduleItem,
-                courseID
             });
         });
     });
@@ -117,10 +119,9 @@ async function verifyLink(data) {
         await canvas.get(`/api/v1/courses/${data.courseID}/modules/${data.moduleItem.module_id}/items/${data.moduleItem.id}`, {}, (err, returnedItem) => {
             if (err) {
                 console.error(err);
-                reject(err);
-                return;
+                return reject(err);
             }
-
+            console.log('returned', returnedItem);
             resolve(returnedItem);
         });
     });
@@ -135,20 +136,21 @@ async function main(userInput) {
     var filePath = userInput.path;
 
     /* Get an array of each courses' id and name from the CSV */
-    const courses = await getCourses(userInput.path);
+    const courses = await getCourses(filePath);
 
     var csvData = [];
 
     /* Make the fix, one course at a time */
     for (var i = 0; i < courses.length; i++) {
-        var logItems = await runTest(courses[i], discoverOnly);
+        var logItems = await courseLogic(courses[i], discoverOnly);
+        console.log('logItems', logItems);
         csvData.push(logItems);
     }
 
     /* Log it all */
     logger.consoleReport();
-    logger.htmlReport('./html-reports');
-    logger.jsonReport('./json-reports');
+    logger.htmlReport('./reports/html-reports');
+    logger.jsonReport('./reports/json-reports');
 
     var csvReport = d3.csvFormat(csvData, ["Course Name", "Course ID", "Module ID", "Module Item ID", "URL Before Change", "Verified New URL", "Link to Module Item"]);
     fs.writeFile('canvasLinkReplacementReport.csv', csvReport, (err) => {

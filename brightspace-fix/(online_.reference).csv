@@ -1,0 +1,358 @@
+code,id,name
+EvalOnline.Reference.BIO  264,236104,BIO 264 S17 Evaluation Online Reference
+EvalOnline.Reference.BIO  265,236105,BIO 265 S17 Evaluation Online Reference
+Online.Reference.ACCTG180,18776,ACCTG 180 - R--- - Online Reference
+Online.Reference.ACCTG201,18777,ACCTG 201 - R--- - Online Reference
+Online.Reference.ACCTG202,18783,ACCTG 202 - R--- - Online Reference
+Online.Reference.ACCTG205,18784,ACCTG 205 - R--- - Online Reference
+Online.Reference.AGBUS105,16215,AGBUS 105 - R--- - Online Reference
+Online.Reference.AGBUS138,99483,AGBUS 138 - R--- - Online Reference
+Online.Reference.AGBUS147,17575,AGBUS 147 - R--- - Online Reference
+Online.Reference.AGBUS180A,106288,AGBUS 180A - R--- - Online Reference
+Online.Reference.AGBUS180B,106289,AGBUS 180B - R--- - Online Reference
+Online.Reference.ANTH 101,50283,ANTH 101 - R--- - Online Reference
+Online.Reference.ARCH 270,339494,ARCH 270 - D--- - Online Development
+Online.Reference.ART  107,16098,ART 107 - R--- - Online Reference
+Online.Reference.ART  110,101929,ART 110 - R--- - Online Reference
+Online.Reference.ART  110,167864,ART 110 - D--- - Online Development
+Online.Reference.ART  130,73749,ART 130 - R--- - Online Reference
+Online.Reference.ART  160,18812,ART 160 - R--- - Online Reference
+Online.Reference.ART  230,17904,ART 230 - R--- - Online Reference
+Online.Reference.ART  235,17905,ART  235 - R--- - Online Reference
+Online.Reference.ART  331R,18232,ART 331R - R--- - Online Reference
+Online.Reference.ART  337R,18818,ART 337R - R--- - Online Reference
+Online.Reference.AUTO 125,50284,AUTO 125 - R--- - Online Reference
+Online.Reference.AUTO 131,99408,AUTO 131 - R--- - Online Reference
+Online.Reference.AUTO 132,63710,AUTO 132 - R--- - Online Reference
+Online.Reference.AUTO 155,101643,AUTO 155 - R--- - Online Reference
+Online.Reference.AUTO 201,274892,AUTO 201 - R--- - Online Reference
+Online.Reference.AUTO 231,237899,AUTO 231 - D--- - Online Development
+Online.Reference.AUTO 232,264893,AUTO 232 - D--- - Online Development
+Online.Reference.B    100,16156,B 100 - R--- - Online Reference
+Online.Reference.B    101,16155,B 101 - R--- - Online Reference
+Online.Reference.B    120,68324,B 120 - R--- - Online Reference
+Online.Reference.B    129,16150,B 129 - R--- - Online Reference
+Online.Reference.B    183,16170,B 183 - R--- - Online Reference
+Online.Reference.B    201,16163,B 201 - R--- - Online Reference
+Online.Reference.B    211,16177,B 211 - R--- - Online Reference
+Online.Reference.B    215,31319,B 215 - R--- - Online Reference
+Online.Reference.B    240,16184,B 240 - R--- - Online Reference
+Online.Reference.B    241,101156,B 241 - R--- - Online Reference
+Online.Reference.B    250,16178,B 250 - R--- - Online Reference
+Online.Reference.B    275,21582,B 275 - R--- - Online Reference
+Online.Reference.B    283,16185,B 283 - R--- - Online Reference
+Online.Reference.B    301,16197,B 301 - R--- - Online Reference
+Online.Reference.B    320,106952,B 320 - R--- - Online Reference
+Online.Reference.B    321,16202,B 321 - R--- - Online Reference
+Online.Reference.B    341,16192,B 341 - R--- - Online Reference
+Online.Reference.B    351,17583,B 351 - D--- - Online Development
+Online.Reference.B    361,16204,B 361 - R--- - Online Reference
+Online.Reference.B    370,16198,B 370 - R--- - Online Reference
+Online.Reference.B    374,100941,B 374 - R--- - Online Reference
+Online.Reference.B    380,16152,B 380 - R--- - Online Reference
+Online.Reference.B    383,16205,B 383 - R--- - Online Reference
+Online.Reference.B    401,16191,B 401 - R--- - Online Reference
+Online.Reference.B    410,23800,B 410 - R--- - Online Reference
+Online.Reference.B    411,17584,B 411 - D--- - Online Development
+Online.Reference.B    424,16154,B 424 - R--- - Online Reference
+Online.Reference.B    424D,16211,B 424D - R--- - Online Reference
+Online.Reference.B    428,23801,B 428 - R--- - Online Reference
+Online.Reference.B    433,17593,B 433 - R--- - Online Reference
+Online.Reference.B    475,53091,B 475 - R--- - Online Reference
+Online.Reference.B    483,68914,B 483 - R--- - Online Reference
+Online.Reference.B    499E,117483,B 499E - D--- - Online Development
+Online.Reference.BIO  180,280986,BIO 180 - P--- - Online Pilot
+Online.Reference.BIO  221,67128,BIO 221 - R--- - Online Reference
+Online.Reference.BIO  230,17594,BIO 230 - R--- - Online Reference
+Online.Reference.BIO  264,118405,BIO 264 - R--- - Online Reference
+Online.Reference.BIO  264L,58371,BIO 264L - R--- - Online Reference
+Online.Reference.BIO  265,118406,BIO 265 - R--- - Online Reference
+Online.Reference.BIO  265,340011,BIO 265 - P--- - Online Pilot
+Online.Reference.BIO  265L,58369,BIO 265L - R--- - Online Reference
+Online.Reference.BIO  375,99484,BIO 375 - R--- - Online Reference
+Online.Reference.BIO  381,106291,BIO 381 - R--- - Online Reference
+Online.Reference.BIO  475,106292,BIO 475 - R--- - Online Reference
+Online.Reference.CCFD 101,16085,I-Learn 3.0 Example Course
+Online.Reference.CHEM 101,69035,CHEM 101 - R--- - Online Reference
+Online.Reference.CHEM 101L,17595,CHEM 101L - R--- - Online Reference
+Online.Reference.CHEM 105,276690,CHEM 105 - D--- - Online Development
+Online.Reference.CHILD210,16212,CHILD 210 - R--- - Online Reference
+Online.Reference.CHILD300,288150,CHILD 300 - R--- - Online Reference
+Online.Reference.CHILD310,263055,CHILD 310 - R--- - Online Reference
+Online.Reference.CHILD320,16199,CHILD 320 - R--- - Online Reference
+Online.Reference.CIT  110,61380,CIT 110 - R--- - Online Reference
+Online.Reference.CIT  111,61381,CIT 111 - R--- - Online Reference
+Online.Reference.CIT  160,171066,CIT 160 - R--- - Online Reference
+Online.Reference.CIT  225,63194,CIT 225 - R--- - Online Reference
+Online.Reference.CIT  230,32206,CIT 230 - R--- - Online Reference
+Online.Reference.CIT  240,61928,CIT 240 - R--- - Online Reference
+Online.Reference.CIT  241,67134,CIT 241 - R--- - Online Reference
+Online.Reference.CIT  260,63195,CIT 260 - R--- - Online Reference
+Online.Reference.CIT  261,111890,CIT 261 - R--- - Online Reference
+Online.Reference.CIT  262,106277,CIT 262 - P--- - Online Pilot
+Online.Reference.CIT  270,117812,CIT 270 - R--- - Online Reference
+Online.Reference.CIT  301C,17757,CIT 301C - D--- - 1 Online Development
+Online.Reference.CIT  325,106278,CIT 325 - R--- - Online Reference
+Online.Reference.CIT  336,285213,CIT 336 - R--- - Online Reference
+Online.Reference.CIT  352,106279,CIT 352 - R--- - Online Reference
+Online.Reference.CIT  353,111785,CIT 353 - R--- - Online Reference
+Online.Reference.CIT  353,336530,CIT 353 - D--- - Online Development
+Online.Reference.CIT  360,112004,CIT 360 - R--- - Online Reference
+Online.Reference.CIT  365,289959,CIT 365 - R--- - Online Reference
+Online.Reference.CIT  380,111793,CIT 380 - R--- - Online Reference
+Online.Reference.CIT  381,106280,CIT 381 - R--- - Online Reference
+Online.Reference.COMM 102,64185,COMM 102 - R--- - Online Reference
+Online.Reference.COMM 104,56772,COMM 104 - D--- - Online Development
+Online.Reference.COMM 111,17602,COMM 111 - R--- - Online Reference
+Online.Reference.COMM 125,61065,COMM 125 - R--- - Online Reference
+Online.Reference.COMM 130,225324,COMM 130 - R--- - Online Reference
+Online.Reference.COMM 140,99481,COMM 140 - R--- - Online Reference
+Online.Reference.COMM 150,106281,COMM 150 - R--- - Online Reference
+Online.Reference.COMM 175,59656,COMM 175 - R--- - Online Reference
+Online.Reference.COMM 250,106282,COMM 250 - R--- - Online Reference
+Online.Reference.COMM 273,58372,COMM 273 - R--- - Online Reference
+Online.Reference.COMM 280,52555,COMM 280 - R--- - Online Reference
+Online.Reference.COMM 289,106283,COMM 289 - R--- - Online Reference
+Online.Reference.COMM 300,30428,COMM 300 - D--- - Online Development
+Online.Reference.COMM 305,31331,COMM 305 - D--- - Online Development
+Online.Reference.COMM 307,67140,COMM 307 - R--- - Online Reference
+Online.Reference.COMM 310,67126,COMM 310 - R--- - Online Reference
+Online.Reference.COMM 315,17603,COMM 315 - R--- - Online Reference
+Online.Reference.COMM 322,17604,COMM 322 - D--- - Online Development
+Online.Reference.COMM 350,338169,COMM 350 - R--- - Online Reference
+Online.Reference.COMM 352,99489,COMM 352 - R--- - Online Reference
+Online.Reference.COMM 450,106284,COMM 450 - R--- - Online Reference
+Online.Reference.COMM 462,24644,COMM 462 - D--- - Online Development
+Online.Reference.COMM 470,110408,COMM 470 - R--- - Online Reference
+Online.Reference.CONST320,62951,CONST 320 - R--- - Online Reference
+Online.Reference.CONST330,341223,CONST 330 - D--- - Online Development
+Online.Reference.CONST380,55063,CONST 380 - R--- - Online Reference
+Online.Reference.CS   101,232099,CS 101 - R--- - Online Reference
+Online.Reference.CS   124,19191,CS 124 - R--- - Online Reference
+Online.Reference.CS   165,19192,CS 165 - R--- - Online Reference
+Online.Reference.CS   213,18505,CS 213 - R--- - Online Reference
+Online.Reference.CS   235,19198,CS 235 - R--- - Online Reference
+Online.Reference.CS   241,334225,CS 241 - P--- - Online Pilot
+Online.Reference.CS   246,19199,CS 246 - R--- - Online Reference
+Online.Reference.CS   308,106991,CS 308 - R--- - Online Reference
+Online.Reference.CS   313,19217,CS 313 - R--- - Online Reference
+Online.Reference.CS   345,232617,CS 345 - R--- - Online Reference
+Online.Reference.CS   364,112145,CS 364 - R--- - Online Reference
+Online.Reference.CS   371,19236,CS 371 - R--- - Online Reference
+Online.Reference.CS   416,18506,CS 416 - R--- - Online Reference
+Online.Reference.CS   432,17605,CS 432 - R--- - Online Reference
+Online.Reference.CS   470,19237,CS 470 - R--- - Online Reference
+Online.Reference.CS   499,339655,CS 499 - R--- - Online Reference
+Online.Reference.CS   499A,392653,CS 499A - P--- - Online Pilot
+Online.Reference.CS   499B,392654,CS 499B - P--- - Online Pilot
+Online.Reference.ECEN 150,19308,ECEN 150 - R--- - Online Reference
+Online.Reference.ECEN 160,32043,ECEN 160 - R--- - Online Reference
+Online.Reference.ECON 150,16214,ECON 150 - R--- - Online Reference
+Online.Reference.ECON 151,105848,ECON 151 - R--- - Online Reference
+Online.Reference.ECON 151,340641,ECON 151 - D--- - Online Cengage
+Online.Reference.ECON 278,17606,ECON 278 - P--- - Online Pilot
+Online.Reference.ECON 365,100811,ECON 365 - R--- - Online Reference
+Online.Reference.ECSE 425,17607,ECSE 425 - R--- - Online Reference
+Online.Reference.ED   200,50279,ED 200 - R--- - Online Reference
+Online.Reference.ED   202,50278,ED 202 - R--- - Online Reference
+Online.Reference.ED   243,232098,ED 243 - D--- - Online Development
+Online.Reference.ED   312,61910,ED 312 - R--- - Online Reference
+Online.Reference.ED   344,282612,ED 344 - D--- - Online Development
+Online.Reference.EIL  171,55227,EIL 171 - D--- - Online Development
+Online.Reference.EIL  174R,55268,EIL 174R - D--- - Online Development
+Online.Reference.EIL 170,23870,EIL 170 - D--- - Development
+Online.Reference.EIL 173R,23871,EIL 173R - D--- - Online Development
+Online.Reference.ENG  106,19310,ENG 106 - R--- - Online Reference
+Online.Reference.ENG  107,18727,ENG 107 - P--- - Online Pilot
+Online.Reference.ENG  251,106303,ENG 251 - R--- - Online Reference
+Online.Reference.ENG  252,287196,ENG 252 - R--- - Online Reference
+Online.Reference.ENG  314,109633,ENG 314 - R--- - Online Reference
+Online.Reference.ENG  325,99487,ENG 325 - R--- - Online Reference
+Online.Reference.ENG  332,106989,ENG 332 - R--- - Online Reference
+Online.Reference.ENG  335,106300,ENG 335 - R--- - Online Reference
+Online.Reference.ENG  355,106301,ENG 355 - R--- - Online Reference
+Online.Reference.ENG  450,60004,ENG 450 - R--- - Online Reference
+Online.Reference.ESS  375,111794,ESS 375 - R--- - Online Reference
+Online.Reference.FAML 100,16213,FAML 100 - R--- - Online Reference
+Online.Reference.FAML 160,16218,FAML 160 - R--- - Online Reference
+Online.Reference.FAML 200,40664,FAML 200 - R--- - Online Reference
+Online.Reference.FAML 220,182472,FAML 220 - R--- - Online Reference
+Online.Reference.FAML 300,16200,FAML 300 - R--- - Online Reference
+Online.Reference.FAML 360,16164,FAML 360 - R--- - Online Reference
+Online.Reference.FAML 400,16180,FAML 400 - R--- - Online Reference
+Online.Reference.FAML 430,16165,FAML 430 - R--- - Online Reference
+Online.Reference.FAML 445,16187,FAML 445 - R--- - Online Reference
+Online.Reference.FAML 460,107960,FAML 460 - R--- - Online Reference
+Online.Reference.FAML 498R,16193,FAML 498R - R--- - Online Reference
+Online.Reference.FCS  101,117813,FCS 101 - R--- - Online Reference
+Online.Reference.FCS  207,97834,FCS 207 - R--- - Online Reference
+Online.Reference.FCS  245,223437,FCS 245 - P--- - Online Pilot
+Online.Reference.FCS  340,118474,FCS 340 - R--- - Online Reference
+Online.Reference.FDAMF101,19311,FDAMF 101 - R--- - Online Reference
+Online.Reference.FDENG101,28754,FDENG 101 - R--- - Online Reference
+Online.Reference.FDENG301,59659,FDENG 301 - R--- - Online Reference
+Online.Reference.FDHUM110,19492,FDHUM 110 - R--- - Online Reference
+Online.Reference.FDINT211,50276,FDINT 211 - R--- - Online Reference
+Online.Reference.FDMAT108,170928,FDMAT 108 - R--- - Online Reference
+Online.Reference.FDMAT112,290105,FDMAT 112 - R--- - Online Reference (restored)
+Online.Reference.FDMAT112,290419,FDMAT 112 - R--- - Online Reference
+Online.Reference.FDREL100,99485,FDREL 100 - R--- - Online Reference
+Online.Reference.FDREL121,28228,FDREL 121 - R--- - Online Reference
+Online.Reference.FDREL122,57167,FDREL 122 - R--- - Online Reference
+Online.Reference.FDREL130,55329,FDREL 130 - R--- - LDSBC-Online-DButterfield
+Online.Reference.FDREL130,162915,FDREL 130 - D--- - Online Development
+Online.Reference.FDREL200,235151,FDREL 200 - R--- - Online Reference
+Online.Reference.FDREL211,18550,FDREL 211 - R--- - Online Reference
+Online.Reference.FDREL212,18563,FDREL 212 - R--- - Online Reference
+Online.Reference.FDREL225,55104,FDREL 225 - R--- - Online Reference
+Online.Reference.FDREL250,30469,FDREL 250 - R--- - Online Reference
+Online.Reference.FDREL261,19493,FDREL 261 - R--- - Online Reference
+Online.Reference.FDREL275,17609,FDREL 275 - R--- - Online Reference
+Online.Reference.FDREL301,18564,FDREL 301 - R--- - Online Reference
+Online.Reference.FDREL302,18565,FDREL 302 - R--- - Online Reference
+Online.Reference.FDREL324,19497,FDREL 324 - R--- - Online Reference
+Online.Reference.FDREL325,19503,FDREL 325 - R--- - Online Reference
+Online.Reference.FDREL333,19509,FDREL 333 - R--- - Online Reference
+Online.Reference.FDSCI101,50281,FDSCI 101 - R--- - Online Reference
+Online.Reference.FDSCI201,50289,FDSCI 201 - R--- - Online Reference
+Online.Reference.FDSCI203,61374,FDSCI 203 - R--- - Online Reference
+Online.Reference.FDSCI205,61911,FDSCI 205 - R--- - Online Reference
+Online.Reference.FDWLD101,50274,FDWLD 101 - R--- - Online Reference
+Online.Reference.FDWLD201,50275,FDWLD 201 - R--- - Online Reference
+Online.Reference.FHGEN111,164701,FHGEN 111 - R--- - Online Reference
+Online.Reference.FHGEN112,164702,FHGEN 112 - R--- - Online Reference
+Online.Reference.FHGEN120,16179,FHGEN 120 - R--- - Online Reference
+Online.Reference.FHGEN130,16181,FHGEN 130 - R--- - Online Reference
+Online.Reference.FHGEN140,16207,FHGEN 140 - R--- - Online Reference
+Online.Reference.FHGEN160,16182,FHGEN 160 - R--- - Online Reference
+Online.Reference.FHGEN211,16183,FHGEN 211 - R--- - Online Reference
+Online.Reference.FHGEN212,16189,FHGEN 212 - R--- - Online Reference
+Online.Reference.FHGEN251A,16190,FHGEN 251A - R--- - Online Reference
+Online.Reference.FHGEN251B,16195,FHGEN 251B - R--- - Online Reference
+Online.Reference.FHGEN251C,16196,FHGEN 251C - R--- - Online Reference
+Online.Reference.FHGEN251D,16175,FHGEN 251D - R--- - Online Reference
+Online.Reference.FHGEN252A,16194,FHGEN 252A - R--- - Online Reference
+Online.Reference.FHGEN252B,16201,FHGEN 252B - R--- - Online Reference
+Online.Reference.FHGEN252C,16160,FHGEN 252C - R--- - Online Reference
+Online.Reference.FHGEN252D,111795,FHGEN 252D - R--- - Online Reference
+Online.Reference.FHGEN270,16161,FHGEN 270 - R--- - Online Reference
+Online.Reference.FHGEN399,16188,FHGEN 399 - R--- - Online Reference
+Online.Reference.GEOL 111,16233,GEOL 111 - R--- - Online Reference
+Online.Reference.GER  101,68061,GER 101 - R--- - Online Reference
+Online.Reference.GS   101,19510,GS 101 - R--- - Online Reference
+Online.Reference.GS   105,19547,GS 105 - R--- - Online Reference
+Online.Reference.GS   294,81704,GS 294 - R--- - Online Reference
+Online.Reference.HRHP 131,59658,HRHP 131 - R--- - Online Reference
+Online.Reference.HS   240,50282,HS 240 - R--- - Online Reference
+Online.Reference.HS   280,59655,HS 280 - R--- - Online Reference
+Online.Reference.HS   285,61376,HS 285 - R--- - Online Reference
+Online.Reference.HS   310,50290,HS 310 - R--- - Online Reference
+Online.Reference.HS   320,63196,HS 320 - R--- - Online Reference
+Online.Reference.HS   345,67136,HS 345 - R--- - Online Reference
+Online.Reference.HS   370,171073,HS 370 - R--- - Online Reference
+Online.Reference.HS   375,106294,HS 375 - R--- - Online Reference
+Online.Reference.HS   378,106295,HS 378 - R--- - Online Reference
+Online.Reference.HS   384,17610,HS 384 - R--- - Online Reference
+Online.Reference.HS   390,50273,HS 390 - R--- - Online Reference
+Online.Reference.HS   391,61920,HS 391 - R--- - Online Reference
+Online.Reference.HS   401,67129,HS 401 - R--- - Online Reference
+Online.Reference.HS   420,106296,HS 420 - R--- - Online Reference
+Online.Reference.HS   425,67130,HS 425 - R--- - Online Reference
+Online.Reference.HS   460,67127,HS 460 - R--- - Online Reference
+Online.Reference.HS   465,67131,HS 465 - R--- - Online Reference
+Online.Reference.HS   472,31320,HS 472 - P--- - Online Pilot
+Online.Reference.HS   480,111790,HS 480 - R--- - Online Reference
+Online.Reference.HS   484,118298,HS 484 - R--- - Online Reference
+Online.Reference.HS   486,237928,HS 486 - R--- - Online Reference
+Online.Reference.HTM 130,322092,HTM 130 - D--- - LDSBC Development
+Online.Reference.HTM 150,322093,HTM 150 - D--- - LDSBC Development
+Online.Reference.HTM 220,322094,HTM 220 - D--- - LDSBC Development
+Online.Reference.IDS  499,338371,IDS 499 - P--- - Online Pilot
+Online.Reference.LANG 410,19549,LANG 410 - R--- - Online Reference
+Online.Reference.MA   105,105706,MA 105 - R--- - Online Reference
+Online.Reference.MA   106,61373,MA 106 - R--- - Online Reference
+Online.Reference.MA   107,99486,MA 107 - R--- - Online Reference
+Online.Reference.MA   111,106297,MA 111 - R--- - Online Reference
+Online.Reference.MA   205,106298,MA 205 - R--- - Online Reference
+Online.Reference.MATH 100B,19564,MATH 100B - R--- - Online Reference
+Online.Reference.MATH 101,170957,MATH 101 - R--- - Online Reference
+Online.Reference.MATH 109,17611,MATH 109 - R--- - Online Reference
+Online.Reference.MATH 110X,289960,MATH 110X - P--- - Online Pilot
+Online.Reference.MATH 111,171290,MATH 111 - R--- - Online Reference
+Online.Reference.MATH 215,53768,MATH 215 - R--- - Online Reference
+Online.Reference.MATH 221A,62216,MATH 221A - R--- - Online Reference
+Online.Reference.MATH 221B,289357,MATH 221B - R--- - Online Reference
+Online.Reference.MATH 221C,289358,MATH 221C - R--- - Online Reference
+Online.Reference.MATH 316,237072,MATH 316 - P--- - Online Pilot
+Online.Reference.ME   142,277036,ME 142 - D--- - Online Development
+Online.Reference.ME   162,340270,ME 162 - D--- - Online Development
+Online.Reference.ME   172,67619,ME 172 - R--- - Online Reference
+Online.Reference.ME   201,339843,ME 201 - R--- - Online Reference
+Online.Reference.ME   202,117924,ME 202 - R--- - Online Reference
+Online.Reference.ME   204,109669,ME 204 - D--- - Online Development
+Online.Reference.ME   210,19574,ME 210 - R--- - Online Reference
+Online.Reference.ME   231,17617,ME 231 - R--- - Online Reference
+Online.Reference.ME   250,166125,ME 250 - D--- - Online Development
+Online.Reference.ME   272,289447,ME 272 - R--- - Online Reference
+Online.Reference.NURS 316,19575,NURS 316 - R--- - Online Reference
+Online.Reference.NURS 338,33274,NURS 338 - R--- - Online Reference
+Online.Reference.NURS 340,18575,NURS 340 - R--- - Online Reference
+Online.Reference.NURS 400,69258,NURS 400 - R--- - Online Reference
+Online.Reference.NURS 449,32027,NURS 449 - R--- - Online Reference
+Online.Reference.NURS 450,19690,NURS 450 - R--- - Online Reference
+Online.Reference.NUTR 150,61375,NUTR 150 - R--- - Online Reference
+Online.Reference.NUTR 200,17618,NUTR 200 - R--- - Online Reference
+Online.Reference.PH   105,111791,PH 105 - R--- - Online Reference
+Online.Reference.PH   121,111796,PH 121 - R--- - Online Reference
+Online.Reference.PH   223,49459,PH 223 - R--- - Online Reference
+Online.Reference.POLSC110,57714,POLSC 110 - R--- - Online Reference
+Online.Reference.POLSC150,67138,POLSC 150 - R--- - Online Reference
+Online.Reference.POLSC170,99482,POLSC 170 - R--- - Online Reference
+Online.Reference.PSYCH111,61908,PSYCH 111 - R--- - Online Reference
+Online.Reference.PSYCH201,63419,PSYCH 201 - R--- - Online Reference
+Online.Reference.PSYCH302,67132,PSYCH 302 - R--- - Online Reference
+Online.Reference.PSYCH311,67133,PSYCH 311 - R--- - Online Reference
+Online.Reference.PSYCH311,338314,PSYCH 311 - D--- - Online Development
+Online.Reference.PSYCH342,289149,PSYCH 342 - P--- - Online Pilot
+Online.Reference.PSYCH350,289206,PSYCH 350 - P--- - Online Pilot
+Online.Reference.PSYCH376,232618,PSYCH 376 - R--- - Online Reference
+Online.Reference.RM   304,67139,RM 304 - R--- - Online Reference
+Online.Reference.RM   307,99488,RM 307 - R--- - Online Reference
+Online.Reference.RM   370,106285,RM 370 - R--- - Online Reference
+Online.Reference.RM   371,106286,RM 371 - R--- - Online Reference
+Online.Reference.RM   373R,106293,RM 373R - R--- - Online Reference
+Online.Reference.RM   471,99530,RM 471 - R--- - Online Reference
+Online.Reference.RM   472,106287,RM 472 - R--- - Online Reference
+Online.Reference.RM   473,111787,RM 473 - R--- - Online Reference
+Online.Reference.SMMBC105,371784,SMMBC 105 - R--- - LDSBC Online Reference
+Online.Reference.SMMBC120,371785,SMMBC 120 - R--- - LDSBC Online Reference
+Online.Reference.SMMBC130,371790,SMMBC 130 - R--- - LDSBC Online Reference
+Online.Reference.SMMBC140,371791,SMMBC 140 - R--- - LDSBC Online Reference
+Online.Reference.SMMBC150,371792,SMMBC 150 - R--- - LDSBC Online Reference
+Online.Reference.SMMBC160,371804,SMMBC 160 - R--- - LDSBC Online Reference
+Online.Reference.SMMBC296,371805,SMMBC 296 - R--- - LDSBC Online Reference
+Online.Reference.SOC  111,61929,SOC 111 - R--- - Online Reference
+Online.Reference.SOC  112,106290,SOC 112 - R--- - Online Reference
+Online.Reference.SOC  311,62159,SOC 311 - R--- - Online Reference
+Online.Reference.SOC  323,111788,SOC 323 - R--- - Online Reference
+Online.Reference.SOC  383,339361,SOC 383 - P--- - Online Pilot
+Online.Reference.SPAN 101,19704,SPAN 101 - R--- - Online Reference
+Online.Reference.SPAN 102,19722,SPAN 102 - R--- - Online Reference
+Online.Reference.SPAN 302,19721,SPAN 302 - R--- - Online Reference
+Online.Reference.SPED 200,17619,SPED 200 - R--- - Online Reference
+Online.Reference.SPED 310,61382,SPED 310 - R--- - Online Reference
+Online.Reference.SPED 360,229421,SPED 360 - R--- - Online Reference
+Online.Reference.SPED 424,289750,SPED 424 - D--- - Online Development
+Online.Reference.SPED 441,111789,SPED 441 - R--- - Online Reference
+Online.Reference.SW   260,17620,SW 260 - R--- - Online Reference
+Online.Reference.SW   463,277409,SW 463 - R--- - Online Reference
+Online.Reference.TA   115,111786,TA 115 - R--- - Online Reference
+Online.Reference.TA   116,109641,TA 116 - R--- - Online Reference
+Online.Reference.TA   401,111797,TA 401 - R--- - Online Reference
+Online.Reference.TA   402,105615,TA 402 - R--- - Online Reference
+Online.Reference.TESOL101,117840,TESOL 101 - R--- - Online Reference
+Online.Reference.TESOL102,117847,TESOL 102 - R--- - Online Reference
+Online.Reference.TESOL103,117854,TESOL 103 - R--- - Online Reference
+Online.Reference.TESOL104,117831,TESOL 104 - R--- - Online Reference
+Online.Reference.TESOL105,117895,TESOL 105 - R--- - Online Reference
+Online.Reference.WDD  100,61378,WDD 100 - R--- - Online Reference
